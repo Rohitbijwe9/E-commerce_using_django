@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  <title>Checkout</title>
+{% endblock %}
+
+
+{% block content  %}
+  <div class="container">
+    <form action="/checkout/" method="post">
+      {% csrf_token %}
+      <label for="" class="form-control-lg">Name.</label>
+      <input type="text" name="name" class="form-control"/><br/>
+
+      <label for="" class="form-control-lg">Shiping Adress.</label>
+      <input type="text" name="adress" class="form-control"><br/>
+
+      <label for="" class="form-control-lg">Mobile No.</label>
+      <input type="text" name="mobile" class="form-control"></br>
+
+      <label for="" class="form-control-lg">Email.</label>
+      <input type="email" name="email" id="" value="{{value.email}}" class="form-control" placeholder="Enter Email Id."><br>
+
+
+      <input type="submit" value="Make Payment" class="btn btn-info col-4">
+    </form>
+  </div>
+{% endblock %}

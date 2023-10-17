@@ -1,0 +1,39 @@
+{% extends 'base.html '%}
+{%load static %}
+{% block title %}order{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="border rounded p-4 m-4">
+        <p class="display-4 pl-4 ml-4">Your Order</p>
+        <hr>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>srno.</th>
+                <th>Image</th>
+                <th>Prodct Name</th>
+                <th>Order Date</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Status</th>
+            <tr>
+            </thead>
+            <tbody>
+            {% for i in order %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td><img style="height:80px;" class="rounded-circle" src="{{i.image.url}}"></img></td>
+                <td>{{i.product_name}}</td>
+                <td>{{i.order_date}}</td>
+                <td>{{i.price}}</td>
+
+                <td>{{i.Qty}}</td>
+                <td>{{i.status}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

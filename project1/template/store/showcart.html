@@ -1,0 +1,147 @@
+{% extends 'base.html '%}
+{%load static %}
+{% block title %}
+Cart
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></scrip>
+
+{% endblock %}
+
+{% block content %}
+
+
+<div class="container">
+    <div class="border rounded p-4 m4">
+        <p class="display-4 pl-4 ml-4">My Cart</p>
+        <hr>
+        <table class="table">
+            <thead>
+            <tr>
+            <th>sr no.</th>
+            <th>image</th>
+            <th>Product Name</th>
+                <th>Qty</th>
+
+            <th>Price</th>
+                <th></th>
+                <th>Action</th>
+
+                <t></t>
+            </tr>
+            </thead>
+
+
+            <tbody>
+             {% for i in cart %}
+            <tr>
+                <td>1</td>
+                <td><img style="height:80px;" class="rounded-circle" src="{{i.product.image.url}}" alt=""></td>
+                <td>{{i.product.name}}</td>
+                <td>{{i.quantity}}</td>
+
+                <td>Rs.{{i.product.price}}</td>
+
+
+                <td><input type="button" pid="{{i.product.id}}"  class="minus-cart btn btn-primary" value="-"></td>
+                <td><span id="quantity">{{i.quantity}}</span></td>
+
+                <td><input type="button" pid="{{i.product.id}}" class="plus-cart btn btn-primary" value="+"></td>
+                <td><input type="button" pid="{{i.product.id}}" class="btn btn-danger btn-sm remove-cart" value="Delete"></td>
+
+            </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+        <hr>
+        <div class="m-3 p-3">
+            <a href={% url 'checkout' %}  class="btn btn-outline-info border rounded col-lg-3 float-left ">Check Out</a>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script>
+$('.plus-cart').click (function(){
+    var id= $(this).attr("pid").toString();
+    console.log(id)
+    $.ajax({
+    type :"Get",
+    url:"/plus_cart",
+    data : {
+    prod_id : id
+    },
+
+    success:function(data){
+        console.log(data)
+    }
+    })
+    });
+
+
+
+
+
+    $('.minus-cart').click (function(){
+    var id= $(this).attr("pid").toString();
+    console.log(id)
+    $.ajax({
+    type :"Get",
+    url:"/minus_cart",
+    data : {
+    prod_id : id
+    },
+
+    success:function(data){
+        console.log(data)
+    }
+    })
+    });
+
+
+
+$('.remove-cart').click (function(){
+    var id= $(this).attr("pid").toString();
+    console.log(id)
+    var eml=this
+    $.ajax({
+    type :"Get",
+    url:"/remove_cart",
+    data : {
+    prod_id : id
+    },
+
+    success:function(data){
+    console.log(data)
+    $(mythis).closest("tr").fadeout();
+    }
+    })
+    });
+
+</script>
+
+
+{% endblock %}
+

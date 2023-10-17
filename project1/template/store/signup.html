@@ -1,0 +1,46 @@
+{% extends 'base.html '%}
+{% block title %}Customer Signup{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="col-sm-6 offset-sm-3">
+        <h3>CUSTOMER SIGNUP</h3>
+        <form  method="post" class="shadow p-5">
+            {% if messages %}
+            {% for i in massages %}
+            <p {% if i.tags%} class="alert--{{i.tags}} mb-5 form-control-sm"{% endif %}>{{i}}</p>
+            {% endfor %}
+
+            {% endif %}
+
+
+            {% csrf_token %}
+
+            {% if error %}
+            <div class="alert-danger form-control-sm" role="alert">
+                {{error}}
+            </div>
+            {% endif %}
+
+            <div class="form-group">
+                <label for="" class="form-control-lg">Name</label>
+                <INPUT TYPE="text" name="name" id="" value="{{value.name}}" class="form-control" placeholder="Enter Name">
+            </div>
+            <div class="form-group">
+                <label for="" class="form-control-lg">Mobile No.</label>
+                <INPUT TYPE="text" name="phone" id="" value="{{value.phone}}" class="form-control" placeholder="Enter Mobile No.">
+            </div>
+            <div class="form-group pt-4">
+                <input class="btn btn-info" type="submit" value="Sign Up">
+
+            </div>
+        <div class="text-center text-primary fw-bold">
+            <small>Existing User To 32 Acers Orgaanic Farms ?</small>
+        <a class="text-danger " href="{% url 'login_url' %}">Login</a>
+        </div>
+        </form>
+
+
+</div>
+{% endblock %}
